@@ -1,17 +1,17 @@
 page-login {
 
   .login-content {
-    background: #56CA96;
+    background: #FA8072;
 
-    .login-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
+    .logo-row {
     }
 
     .login-box {
-      background: #399F8B;
+      background: #99a7c4;
       padding: 20px 20px 0px 20px;
-      margin-top: 30px;
+      margin-top: 10px;
+      margin-left: 4.75px;
+      margin-right: 4.75px;
     }
 
     ion-row {
@@ -40,7 +40,7 @@ page-login {
      }
 
      .submit-btn {
-       background: #51CFB1;
+       background: #FA8072;
        border-radius: 30px !important;
        border: 1px solid #ffffff;
      }
