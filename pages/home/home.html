@@ -1,36 +1,134 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar no-border-bottom>
     <ion-title>Home</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
+      <button ion-button (click)="addlisting()">
+        <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <ion-toolbar no-border-top>
+  <ion-segment [(ngModel)]="apartment">
+    <ion-segment-button value="favorites">
+      Favorites
+    </ion-segment-button>
+    <ion-segment-button value="user-listings">
+      Your Listings
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <ion-row>
-      <ion-col>
-        <img class="floated" src="http://placehold.it/100x100"/>
-      </ion-col>
-      <ion-col>
-        <h2>Jon Smith</h2>
-        <p class="description">Location: Oxford, MS</p>
-      </ion-col>
-    </ion-row>
-  </div>
-  <div>
-    <ion-row>
-      <ion-col>
-        <button ion-button full class="headings">Favorites</button>
-      </ion-col>
-      <ion-col>
-        <button ion-button full class="headings">Your Listings</button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-    </ion-row>
+  <div [ngSwitch]="apartment">
+    <ion-list *ngSwitchCase="'favorites'">
+      <ion-card>
+        <img src="assets/img/apartment-log-in.jpg"/>
+        <ion-card-content>
+          <ion-card-title>
+            Lexington Pointe Apartment
+          </ion-card-title>
+          <p>
+            An apartment listing for the Lexington Pointe Apartment Complex
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-right>
+              Map
+              <ion-icon name='pin'></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+        <ion-card>
+          <img src="assets/img/apartment-log-in.jpg"/>
+          <ion-card-content>
+          <ion-card-title>
+            Lexington Pointe Apartment
+          </ion-card-title>
+          <p>
+            An apartment listing for the Lexington Pointe Apartment Complex
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-right>
+              Map
+              <ion-icon name='pin'></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'user-listings'">
+      <ion-card>
+        <img src="assets/img/apartment-log-in.jpg"/>
+        <ion-card-content>
+          <ion-card-title>
+            Hunters Folly Grove
+          </ion-card-title>
+          <p>
+            An apartment listing for the Lexington Pointe Apartment Complex
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-right>
+              Map
+              <ion-icon name='pin'></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+        <ion-card>
+          <img src="assets/img/apartment-log-in.jpg"/>
+          <ion-card-content>
+          <ion-card-title>
+            Lafayette Place Apartment
+          </ion-card-title>
+          <p>
+            An apartment listing for the Lafayette Place Apartment Complex
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-right>
+              Map
+              <ion-icon name='pin'></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
   </div>
 </ion-content>
