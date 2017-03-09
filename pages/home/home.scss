@@ -1,4 +1,7 @@
 page-home {
+  ion-title {
+    color: #FA8072//color($colors, header);
+  }
   .home {
     background: #56CA96;
   }
@@ -9,5 +12,5 @@ page-home {
     text-align: center;
     font-size: 1.25em;
   }
-  
+
 }
