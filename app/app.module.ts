@@ -11,6 +11,7 @@ import { AuthService } from '../providers/auth-service';
 import { RegisterPage } from '../pages/register/register';
 import { UserPage } from '../pages/user/user';
 import { AddlistingPage } from '../pages/addlisting/addlisting'
+import { AboutPage } from '../pages/about/about';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddlistingPage } from '../pages/addlisting/addlisting'
     RegisterPage,
     UserPage,
     AddlistingPage,
-    TabsPage
+    TabsPage,
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -39,7 +41,8 @@ import { AddlistingPage } from '../pages/addlisting/addlisting'
     RegisterPage,
     UserPage,
     AddlistingPage,
-    TabsPage
+    TabsPage,
+    AboutPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
 })
