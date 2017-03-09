@@ -15,8 +15,8 @@ export class AddlistingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddlistingPage');
-  }
+goBack(){
+  this.navCtrl.pop();
+}
 
 }
