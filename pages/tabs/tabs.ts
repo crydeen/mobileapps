@@ -18,7 +18,7 @@ export class TabsPage {
   tab4Root: any = UserPage;
   tab5Root: any = SettingsPage;
 
-  constructor() {4
+  constructor() {
 
   }
 }
