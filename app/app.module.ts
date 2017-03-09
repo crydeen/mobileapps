@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { RegisterPage } from '../pages/register/register';
 import { UserPage } from '../pages/user/user';
+import { AddlistingPage } from '../pages/addlisting/addlisting'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { UserPage } from '../pages/user/user';
     LoginPage,
     RegisterPage,
     UserPage,
+    AddlistingPage,
     TabsPage
   ],
   imports: [
@@ -36,6 +38,7 @@ import { UserPage } from '../pages/user/user';
     LoginPage,
     RegisterPage,
     UserPage,
+    AddlistingPage,
     TabsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]

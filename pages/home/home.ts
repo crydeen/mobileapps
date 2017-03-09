@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
+import { AddlistingPage} from '../addlisting/addlisting';
 
 @Component({
   selector: 'page-home',
@@ -17,6 +18,10 @@ export class HomePage {
     let info = this.auth.getUserInfo();
     this.username = info.name;
     this.email = info.email;
+  }
+
+  public addlisting() {
+    this.nav.push(AddlistingPage);
   }
 
   public logout() {
