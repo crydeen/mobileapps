@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>AddlistingPage</ion-title>
+    <ion-title>Add Listing</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -93,13 +93,12 @@
           </ion-item>
 
     <ion-item>
-      <ion-label>add picture</ion-label>
-      <ion-input type="password" value=""></ion-input>
+      <button ion-button color="primary" (click)="pictureAdded()">Add Picture</button>
     </ion-item>
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block>Add Listing</button>
+    <button ion-button block color="primary" (click)="showToast('bottom')">Add Listing</button>
   </div>
 
 </ion-content>
