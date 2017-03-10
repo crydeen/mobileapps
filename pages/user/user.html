@@ -20,13 +20,21 @@
       </ion-col>
     </ion-row>
   </div>
-
-  <p>
-    Information about John</p>
-  <p>
-    Information about John</p>
-  <p>
-    Information about John</p>
-  <p>
-    Information about John</p>
+  <div>
+  <ion-list>
+    <ion-list-header>Email</ion-list-header>
+    <ion-item>
+      <p>jsmith@gmail.com</p>
+      <button ion-button clear item-right (click)="changeemail()">Change</button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Active Listings</ion-list-header>
+    <ion-item>
+      <p>Lexington Pointe Apartment</p>
+    <button ion-button clear item-right (click)="viewlistings()">View</button>
+  </ion-item>
+  </ion-list>
+  <button ion-button block (click)="addlisting()">Add a Listing</button>
+  </div>
 </ion-content>
