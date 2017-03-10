@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { ToastController } from 'ionic-angular';
 /*
   Generated class for the Addlisting page.
 
@@ -13,10 +13,21 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AddlistingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {}
 
-goBack(){
-  this.navCtrl.pop();
+pictureAdded(){
+
 }
+
+
+showToast(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'Listing Added Successfully',
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
+    this.navCtrl.pop();
+  }
 
 }
