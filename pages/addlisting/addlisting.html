@@ -19,50 +19,17 @@
 
     <ion-item>
       <ion-label>Address</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-input [(ngModel)]="address" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Rental Cost</ion-label>
-      <ion-input type="password" value=""></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Pets</ion-label>
-      <ion-select [(ngModel)]="pets">
-        <ion-option value="0">1</ion-option>
-        <ion-option value="1">1</ion-option>
-        <ion-option value="2">2</ion-option>
-        <ion-option value="3">3</ion-option>
-        <ion-option value="4">4</ion-option>
-        <ion-option value="5">5</ion-option>
-        <ion-option value="6">6</ion-option>
-        <ion-option value="7">7</ion-option>
-        <ion-option value="8">8</ion-option>
-        <ion-option value="9">9</ion-option>
-        <ion-option value="10">10</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Number of Rooms</ion-label>
-      <ion-select [(ngModel)]="Rooms">
-        <ion-option value="1">1</ion-option>
-        <ion-option value="2">2</ion-option>
-        <ion-option value="3">3</ion-option>
-        <ion-option value="4">4</ion-option>
-        <ion-option value="5">5</ion-option>
-        <ion-option value="6">6</ion-option>
-        <ion-option value="7">7</ion-option>
-        <ion-option value="8">8</ion-option>
-        <ion-option value="9">9</ion-option>
-        <ion-option value="10">10</ion-option>
-      </ion-select>
+      <ion-input [(ngModel)]="cost" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
           <ion-label>Bedrooms</ion-label>
-          <ion-select [(ngModel)]="Bedrooms">
+          <ion-select [(ngModel)]="bedrooms">
             <ion-option value="1">1</ion-option>
             <ion-option value="2">2</ion-option>
             <ion-option value="3">3</ion-option>
@@ -78,7 +45,29 @@
 
         <ion-item>
             <ion-label>Bathrooms</ion-label>
-            <ion-select [(ngModel)]="gender">
+            <ion-select [(ngModel)]="bathrooms">
+              <ion-option value="1">1</ion-option>
+              <ion-option value="2">2</ion-option>
+              <ion-option value="3">3</ion-option>
+              <ion-option value="4">4</ion-option>
+              <ion-option value="5">5</ion-option>
+              <ion-option value="6">6</ion-option>
+              <ion-option value="7">7</ion-option>
+              <ion-option value="8">8</ion-option>
+              <ion-option value="9">9</ion-option>
+              <ion-option value="10">10</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Square Feet</ion-label>
+            <ion-input [(ngModel)]="squarefeet" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Number of Pets</ion-label>
+            <ion-select [(ngModel)]="pets">
+              <ion-option value="0">0</ion-option>
               <ion-option value="1">1</ion-option>
               <ion-option value="2">2</ion-option>
               <ion-option value="3">3</ion-option>
@@ -98,7 +87,7 @@
   </ion-list>
 
   <div padding>
-    <button ion-button block color="primary" (click)="showToast('bottom')">Add Listing</button>
+    <button ion-button block color="primary" (click)="addlisting(address, cost, bedrooms, bathrooms, squarefeet, pets)">Add Listing</button>
   </div>
 
 </ion-content>
