@@ -13,6 +13,19 @@ import { UserPage } from '../pages/user/user';
 import { AddlistingPage } from '../pages/addlisting/addlisting'
 import { AboutPage } from '../pages/about/about';
 
+import { Component, NgZone } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyB11EG_8OeXo3CzSetngw7e0nQp86XL3xo",
+    authDomain: "simple-subleasing.firebaseapp.com",
+    databaseURL: "https://simple-subleasing.firebaseio.com",
+    storageBucket: "simple-subleasing.appspot.com",
+    messagingSenderId: "993168252989"
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +41,8 @@ import { AboutPage } from '../pages/about/about';
     AboutPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

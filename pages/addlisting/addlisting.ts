@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 /*
   Generated class for the Addlisting page.
 
@@ -12,8 +14,26 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'addlisting.html'
 })
 export class AddlistingPage {
+  apartments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public af: AngularFire) {
+    this.apartments = af.database.list('/apartments');
+  }
+
+  public addlisting(address, rent, bedrooms, bathrooms, squarefeet, pets) {
+    this.apartments.push({
+      address: address,
+      rent: rent,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+      squarefeet: squarefeet,
+      pets: pets
+    }).then( newListing => {
+      this.navCtrl.pop();
+    }, error => {
+      console.log(error);
+    });
+}
 
 pictureAdded(){
 

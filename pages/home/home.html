@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar color="primary" no-border-bottom>
     <ion-title>Home</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addSong()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
       <ion-buttons end>
       <button ion-button (click)="addlisting()">
         <ion-icon name="add"></ion-icon>
@@ -23,17 +28,15 @@
 <ion-content padding>
   <div [ngSwitch]="apartment">
     <ion-list *ngSwitchCase="'favorites'">
-      <ion-card>
+      <ion-card *ngFor="let apartment of apartments | async">
         <img src="assets/img/apartment-log-in.jpg"/>
         <ion-card-content>
-          <ion-card-title>
-            Lexington Pointe Apartment
-          </ion-card-title>
-          <p>
-            An apartment listing for the Lexington Pointe Apartment Complex
-          </p>
+          <h2>{{apartment.address}}</h2>
+          <h3>Rent Per Month: ${{apartment.rent}}</h3>
+          <p>Number of Bedrooms: {{apartment.bedrooms}}</p>
+          <p>Number of Bathrooms: {{apartment.bathrooms}}</p>
+          <p>Square Feet: {{apartment.squarefeet}}</p>
         </ion-card-content>
-
         <ion-row no-padding>
           <ion-col>
             <button ion-button clear small color="primary" icon-left>
@@ -48,46 +51,18 @@
             </button>
           </ion-col>
         </ion-row>
-      </ion-card>
-        <ion-card>
-          <img src="assets/img/apartment-log-in.jpg"/>
-          <ion-card-content>
-          <ion-card-title>
-            Lexington Pointe Apartment
-          </ion-card-title>
-          <p>
-            An apartment listing for the Lexington Pointe Apartment Complex
-          </p>
-        </ion-card-content>
-
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="primary" icon-left>
-              <ion-icon name='star'></ion-icon>
-              Favorite
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear small color="primary" icon-right>
-              Map
-              <ion-icon name='pin'></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
+    </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'user-listings'">
-      <ion-card>
+      <ion-card *ngFor="let apartment of apartments | async">
         <img src="assets/img/apartment-log-in.jpg"/>
         <ion-card-content>
-          <ion-card-title>
-            Hunters Folly Grove
-          </ion-card-title>
-          <p>
-            An apartment listing for the Lexington Pointe Apartment Complex
-          </p>
+          <h2>{{apartment.address}}</h2>
+          <h3>Rent Per Month: ${{apartment.rent}}</h3>
+          <p>Number of Bedrooms: {{apartment.bedrooms}}</p>
+          <p>Number of Bathrooms: {{apartment.bathrooms}}</p>
+          <p>Square Feet: {{apartment.squarefeet}}</p>
         </ion-card-content>
-
         <ion-row no-padding>
           <ion-col>
             <button ion-button clear small color="primary" icon-left>
@@ -102,33 +77,7 @@
             </button>
           </ion-col>
         </ion-row>
-      </ion-card>
-        <ion-card>
-          <img src="assets/img/apartment-log-in.jpg"/>
-          <ion-card-content>
-          <ion-card-title>
-            Lafayette Place Apartment
-          </ion-card-title>
-          <p>
-            An apartment listing for the Lafayette Place Apartment Complex
-          </p>
-        </ion-card-content>
-
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="primary" icon-left>
-              <ion-icon name='star'></ion-icon>
-              Favorite
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear small color="primary" icon-right>
-              Map
-              <ion-icon name='pin'></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
+    </ion-card>
     </ion-list>
   </div>
 </ion-content>
