@@ -9,10 +9,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { RegisterPage } from '../pages/register/register';
+import { RecoverPage } from '../pages/recover/recover';
 import { UserPage } from '../pages/user/user';
 import { AddlistingPage } from '../pages/addlisting/addlisting'
+import { ChangepasswordPage } from '../pages/changepassword/changepassword'
 import { AboutPage } from '../pages/about/about';
-
 import { Component, NgZone } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,8 +36,10 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     RegisterPage,
+    RecoverPage,
     UserPage,
     AddlistingPage,
+    ChangepasswordPage,
     TabsPage,
     AboutPage
   ],
@@ -53,8 +56,10 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     RegisterPage,
+    RecoverPage,
     UserPage,
     AddlistingPage,
+    ChangepasswordPage,
     TabsPage,
     AboutPage
   ],

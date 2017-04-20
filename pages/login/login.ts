@@ -1,67 +1,70 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading/*, NavParams */} from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../register/register';
+import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
+import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
+import { RecoverPage } from '../recover/recover';
+import firebase from 'firebase';
 
-/*
-  Generated class for the Login page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  loading: Loading;
-  registerCredentials = {email: '', password: ''};
+  email: any;
+  password: any;
+  tabBarElement: any;
+  fireauth: any;
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public angfire: AngularFire) {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this.fireauth = firebase.auth();
+  }
+
+  ionViewWillEnter(){
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave(){
+    this.tabBarElement.style.display = 'flex';
+  }
 
   public createAccount() {
-    this.nav.push(RegisterPage);
+    this.navCtrl.push(RegisterPage);
   }
 
-  public login() {
-    this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {
-        setTimeout(() => {
-          this.loading.dismiss();
-          this.nav.setRoot(TabsPage)
-        });
-      }
-      else {
-        //this.showError("Access Denied");
-        this.loading.dismiss();
-        this.nav.setRoot(TabsPage)
-      }
+  public recover() {
+    this.navCtrl.push(RecoverPage);
+  }
+
+  login() {
+    this.fireauth.signInWithEmailAndPassword(this.email,this.password).catch(function(error){
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+    });
+    this.angfire.auth.login({
+      email: this.email,
+      password: this.password
     },
-    error => {
-      this.showError(error);
-    });
-  }
-
-  showLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loading.present();
-  }
-
-  showError(text) {
-    setTimeout(() => {
-      this.loading.dismiss();
-    });
-
-    let alert = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    alert.present(prompt);
+      {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password
+      }).then((response) => {
+        console.log('Login success' + JSON.stringify(response));
+        let currentuser = {
+          email: response.auth.email,
+          picture: response.auth.photoURL
+        };
+        window.localStorage.setItem('currentuser', JSON.stringify(currentuser));
+        this.navCtrl.setRoot(TabsPage);
+      }).catch((error) => {
+        console.log(error);
+    })
   }
 
   ionViewDidLoad() {

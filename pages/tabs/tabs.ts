@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-
+import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ListingsPage } from '../listings/listings';
 import { MapPage } from '../map/map';
 import { UserPage } from '../user/user';
 import { SettingsPage} from '../settings/settings';
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -18,7 +19,16 @@ export class TabsPage {
   tab4Root: any = UserPage;
   tab5Root: any = SettingsPage;
 
-  constructor() {
-
+  constructor(private navCtrl: NavController) {
+    if (!this.isLoggedin()) {
+      console.log('You are not logged in');
+      this.navCtrl.setRoot(LoginPage);
   }
+
+}
+isLoggedin() {
+  if (window.localStorage.getItem('currentuser')) {
+    return true;
+  }
+}
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AddlistingPage } from '../addlisting/addlisting';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { ChangepasswordPage } from '../changepassword/changepassword';
 
 @Component({
   selector: 'page-user',
@@ -17,6 +18,10 @@ export class UserPage {
 
   public addlisting() {
     this.nav.push(AddlistingPage);
+  }
+
+  public changePassword() {
+    this.nav.push(ChangepasswordPage);
   }
 
   changeemail(){

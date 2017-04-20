@@ -20,19 +20,15 @@
     </ion-item>
   </ion-list>
 
-  <ion-card>
-
+  <ion-card *ngFor="let apartment of apartments | async">
     <img src="assets/img/apartment-log-in.jpg"/>
-
     <ion-card-content>
-      <ion-card-title>
-        Lexington Pointe Apartment
-      </ion-card-title>
-      <p>
-        An apartment listing for the Lexington Pointe Apartment Complex
-      </p>
+      <h2>{{apartment.address}}</h2>
+      <h3>Rent Per Month: ${{apartment.rent}}</h3>
+      <p>Number of Bedrooms: {{apartment.bedrooms}}</p>
+      <p>Number of Bathrooms: {{apartment.bathrooms}}</p>
+      <p>Square Feet: {{apartment.squarefeet}}</p>
     </ion-card-content>
-
     <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="primary" icon-left>
@@ -47,7 +43,6 @@
         </button>
       </ion-col>
     </ion-row>
-
-  </ion-card>
+</ion-card>
 
 </ion-content>

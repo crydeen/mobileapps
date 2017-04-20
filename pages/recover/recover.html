@@ -1,5 +1,5 @@
 <!--
-  Generated template for the Register page.
+  Generated template for the Recover page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,13 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Register</ion-title>
+    <ion-title>recover</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content class="login-content" padding>
+<ion-content padding>
+
   <div class="login-box">
 
     <form>
@@ -25,20 +26,17 @@
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="email" required></ion-input>
             </ion-item>
 
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
-            </ion-item>
-
           </ion-list>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button round block (click)="register()">Register</button>
+          <button ion-button round block (click)="recover()">Send Recovery Email</button>
         </ion-col>
       </ion-row>
 
     </form>
   </div>
+
 </ion-content>

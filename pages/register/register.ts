@@ -1,55 +1,31 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController/*,NavParams*/ } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
-
-/*
-  Generated class for the Register page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
+import firebase from 'firebase';
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
 })
 export class RegisterPage {
   createSuccess = false;
-  registerCredentials = {email: '', password: ''};
+  email: any;
+  password: any;
+  fireauth: any;
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) {}
+  constructor(private navCtrl: NavController, private alertCtrl: AlertController, public angfire: AngularFire) {
+    this.fireauth = firebase.auth();
+  }
 
   public register() {
-    this.auth.register(this.registerCredentials).subscribe(success => {
-      if (success) {
-        this.createSuccess = true;
-          this.showPopup("Success","Account created.");
-      }
-      else {
-        this.showPopup("Error","Problem creating account.");
-      }
-    },
-  error => {
-    this.showPopup("Error",error);
+    this.fireauth.createUserWithEmailAndPassword(
+    this.email,
+    this.password
+  ).catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
   });
-  }
-
-  showPopup(title, text) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: text,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => {
-            if (this.createSuccess) {
-              this.nav.popToRoot();
-            }
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
+  this.navCtrl.pop();
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');

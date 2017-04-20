@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'page-listings',
@@ -9,9 +10,10 @@ import { NavController } from 'ionic-angular';
 
 
 export class ListingsPage {
+  apartments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController,public alertCtrl: AlertController, public angfire: AngularFire) {
+    this.apartments = angfire.database.list('/apartments');
   }
 
   filter(){
