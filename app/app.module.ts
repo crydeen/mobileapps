@@ -18,6 +18,7 @@ import { Component, NgZone } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from 'angularfire2';
+import { ConnectivityService } from '../providers/connectivity-service';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyB11EG_8OeXo3CzSetngw7e0nQp86XL3xo",
@@ -63,6 +64,6 @@ export const firebaseConfig = {
     TabsPage,
     AboutPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ConnectivityService]
 })
 export class AppModule {}

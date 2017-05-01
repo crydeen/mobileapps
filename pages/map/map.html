@@ -3,9 +3,13 @@
     <ion-title>
       Map
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
+    </ion-buttons> 
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <img height="468" src="assets/img/map.jpg"/>
+  <!-- <img height="468" src="assets/img/map.jpg"/> -->
+  <div #map id="map"></div>
 </ion-content>
