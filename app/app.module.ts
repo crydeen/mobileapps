@@ -19,6 +19,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from 'angularfire2';
 import { ConnectivityService } from '../providers/connectivity-service';
+import { Camera } from 'ionic-native';
+import { IonicStorageModule } from '@ionic/storage';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyB11EG_8OeXo3CzSetngw7e0nQp86XL3xo",
@@ -46,7 +48,8 @@ export const firebaseConfig = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,6 +67,6 @@ export const firebaseConfig = {
     TabsPage,
     AboutPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ConnectivityService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, Camera, ConnectivityService]
 })
 export class AppModule {}
