@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../register/register';
-import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
+import { AuthProviders, AuthMethods, AngularFire, FirebaseListObservable } from 'angularfire2';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { RecoverPage } from '../recover/recover';
@@ -18,11 +18,15 @@ export class LoginPage {
   password: any;
   tabBarElement: any;
   fireauth: any;
-
+  users: FirebaseListObservable<any>;
+  apartments: FirebaseListObservable<any>;
+  ref: any;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public angfire: AngularFire) {
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.fireauth = firebase.auth();
+    this.users = angfire.database.list('/users');
+    this.apartments = angfire.database.list('/apartments');
   }
 
   ionViewWillEnter(){
@@ -65,6 +69,21 @@ export class LoginPage {
       }).catch((error) => {
         console.log(error);
     })
+
+    this.apartments.subscribe(items => {
+      console.log(items);
+      items.forEach(addresses => {
+
+      });
+    });
+    var database = firebase.database();
+    //  this.users.push({
+    //    email: this.email,
+    //    favorites: null
+    //  })
+    // firebase.database().ref('/users/' + this.email).set({
+    //
+    // })
   }
 
   ionViewDidLoad() {

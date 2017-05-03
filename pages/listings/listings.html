@@ -31,7 +31,7 @@
     </ion-card-content>
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="primary" icon-left>
+        <button ion-button clear small color="primary" icon-left (click)="favorite(apartment.$key)">
           <ion-icon name='star'></ion-icon>
           Favorite
         </button>

@@ -11,9 +11,16 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 export class ListingsPage {
   apartments: FirebaseListObservable<any>;
+  favorites: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController,public alertCtrl: AlertController, public angfire: AngularFire) {
     this.apartments = angfire.database.list('/apartments');
+    this.favorites = angfire.database.list('/favorites');
+  }
+
+  favorite(apartment) {
+    console.log("Apartment"+ apartment);
+    this.favorites.push(apartment);
   }
 
   filter(){

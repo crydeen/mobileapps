@@ -15,12 +15,18 @@ export class HomePage {
   fireauth: any;
   apartment: string = "favorites";
   apartments: FirebaseListObservable<any>;
+  favorites: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, public angfire: AngularFire, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController) {
     this.fireauth = firebase.auth();
     this.apartments = angfire.database.list('/apartments');
+    this.favorites = this.angfire.database.list('/favorites');
   }
 
+
+  public favorite(apartment) {
+    this.favorites.push(apartment);
+  }
 
   public addlisting() {
     this.navCtrl.push(AddlistingPage);

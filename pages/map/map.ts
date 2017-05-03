@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ConnectivityService } from '../../providers/connectivity-service';
 import { Geolocation } from 'ionic-native';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { googlemaps } from 'googlemaps';
 
 declare var google;
@@ -13,14 +14,69 @@ declare var google;
 export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
-
   map: any;
   mapInitialised: boolean = false;
   apiKey: 'AIzaSyC25B2JZwzrh3n3MvgNTgccUhc2EhGTU-g';
+  markers: FirebaseListObservable<any>;
 
-  constructor(public nav: NavController, public connectivityService: ConnectivityService) {
+  constructor(public nav: NavController, public connectivityService: ConnectivityService, public angfire: AngularFire) {
     this.loadGoogleMaps();
+    this.markers = angfire.database.list('/apartments');
   }
+
+  // ionViewDidLoad() {
+  //   this.getMarkers(map);
+  // }
+
+  getMarkers(map) {
+    var geocoder = new google.maps.Geocoder();
+    let count: number = 0;
+    let list = new Array(100);
+    this.markers.subscribe(items => {
+      console.log(items);
+      items.forEach(addresses => {
+        let count: number = 0;
+        geocoder.geocode({'address': addresses.address + " Oxford, MS"}, function(results, status) {
+          if (status === 'OK') {
+            console.log(addresses.address)
+            console.log("Space after")
+            let marker = new google.maps.Marker({
+              map: map,
+              //position: new google.maps.LatLng(34.365712, -89.560150)
+              position: results[0].geometry.location
+            });
+            let infoWindow = new google.maps.InfoWindow({
+              content: addresses.address
+            });
+            google.maps.event.addListener(marker, 'click', () => {
+              infoWindow.open(this.map, marker);
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+          console.log(count);
+          count++;
+        });
+        list[count] = addresses.address;
+        console.log('Address:', list[count]);
+      });
+    });
+  }
+
+  addMarker(){
+
+  let marker = new google.maps.Marker({
+    map: this.map,
+    animation: google.maps.Animation.DROP,
+    // position: this.map.getCenter()
+    position: new google.maps.LatLng(34.365712, -89.560150)
+  });
+
+  let content = "<h4>Information!</h4>";
+
+  this.addInfoWindow(marker, content);
+
+}
 
   loadGoogleMaps(){
     this.addConnectivityListeners();
@@ -78,11 +134,13 @@ export class MapPage {
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      this.getMarkers(this.map);
     });
 
 
     // this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
+
 
   disableMap() {
     console.log("diable map");
@@ -118,20 +176,6 @@ export class MapPage {
     document.addEventListener('offline', onOffline, false);
   }
 
-  addMarker(){
-
-  let marker = new google.maps.Marker({
-    map: this.map,
-    animation: google.maps.Animation.DROP,
-    // position: this.map.getCenter()
-    position: new google.maps.LatLng(34.365712, -89.560150)
-  });
-
-  let content = "<h4>Information!</h4>";
-
-  this.addInfoWindow(marker, content);
-
-}
 
 addInfoWindow(marker, content){
 

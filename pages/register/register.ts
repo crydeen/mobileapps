@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController/*,NavParams*/ } from 'ionic-angular';
-import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
+import { AuthProviders, AuthMethods, AngularFire, FirebaseListObservable } from 'angularfire2';
 import firebase from 'firebase';
 @Component({
   selector: 'page-register',
@@ -11,9 +11,12 @@ export class RegisterPage {
   email: any;
   password: any;
   fireauth: any;
+  users: FirebaseListObservable<any>;
 
   constructor(private navCtrl: NavController, private alertCtrl: AlertController, public angfire: AngularFire) {
     this.fireauth = firebase.auth();
+    this.users = angfire.database.list('/users');
+
   }
 
   public register() {
