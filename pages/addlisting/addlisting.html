@@ -83,7 +83,9 @@
 
     <ion-item>
       <button ion-button color="primary" (click)="pictureAdded()">Add Picture</button>
-    </ion-item>
+      <img [src]="base64Image" *ngIf="base64Image" />
+      </ion-item>
+
   </ion-list>
 
   <div padding>

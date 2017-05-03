@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-listings',
