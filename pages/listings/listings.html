@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-buttons end filter>
       <button ion-button icon-right color="royal" (click)="filter()">
         <ion-icon name="list"></ion-icon>
@@ -13,14 +13,7 @@
 
 
 <ion-content padding>
-
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      {{ item }}
-    </ion-item>
-  </ion-list>
-
-  <ion-card *ngFor="let apartment of apartments | async">
+  <ion-card *ngFor="let apartment of apartmentList">
     <img src="assets/img/apartment-log-in.jpg"/>
     <ion-card-content>
       <h2>{{apartment.address}}</h2>
@@ -31,13 +24,19 @@
     </ion-card-content>
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="primary" icon-left (click)="favorite(apartment.$key)">
-          <ion-icon name='star'></ion-icon>
-          Favorite
+        <button ion-button clear small color="primary" icon-left (click)="fav(apartment)">
+           <ion-icon name='star'></ion-icon>
+           Favorite
         </button>
+        <!-- <label>
+          <span class="button-inner">
+          <input class="star" type="checkbox" name="favorite" value= "favorited" (click)="fav(apartment)" checked>
+          <span class="color">Favorite</span>
+        </span>
+        </label> -->
       </ion-col>
       <ion-col text-right>
-        <button ion-button clear small color="primary" icon-right>
+        <button ion-button clear small color="primary" icon-right (click)="map(apartment)">
           Map
           <ion-icon name='pin'></ion-icon>
         </button>

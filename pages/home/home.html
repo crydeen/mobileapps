@@ -23,7 +23,9 @@
 <ion-content padding>
   <div [ngSwitch]="apartment">
     <ion-list *ngSwitchCase="'favorites'">
-      <ion-card *ngFor="let apartment of apartments | async">
+      <ion-card *ngFor="let apartment of favorites | async">
+      <!-- <div *ng-repeat="apartment in list"> -->
+      <!-- <ion-card> -->
         <img src="assets/img/apartment-log-in.jpg"/>
         <ion-card-content>
           <h2>{{apartment.address}}</h2>
@@ -34,22 +36,23 @@
         </ion-card-content>
         <ion-row no-padding>
           <ion-col>
-            <button ion-button clear small color="primary"(click)="fav(apartment)" icon-left>
+            <button ion-button clear small color="primary"(click)="deletefav(apartment)" icon-left>
               <ion-icon name='star'></ion-icon>
               Favorite
             </button>
           </ion-col>
           <ion-col text-right>
-            <button ion-button clear small color="primary" icon-right>
+            <button ion-button clear small color="primary" (click)="map(apartment)" icon-right>
               Map
               <ion-icon name='pin'></ion-icon>
             </button>
           </ion-col>
         </ion-row>
     </ion-card>
+  <!-- </div> -->
     </ion-list>
     <ion-list *ngSwitchCase="'user-listings'">
-      <ion-card *ngFor="let apartment of apartments | async">
+      <ion-card *ngFor="let apartment of postings | async">
         <img src="assets/img/apartment-log-in.jpg"/>
         <ion-card-content>
           <h2>{{apartment.address}}</h2>
@@ -69,7 +72,7 @@
             </button>
           </ion-col>
           <ion-col text-right>
-            <button ion-button clear small color="primary" icon-right>
+            <button ion-button clear small color="primary" icon-right (click)="map(apartment)">
               Map
               <ion-icon name='pin'></ion-icon>
             </button>

@@ -1,3 +1,28 @@
 page-listings {
-
+  .star {
+    visibility: hidden;
+    font-size: 15px;
+    cursor: pointer;
+    color:  #FA8072;
+  }
+  .star:before {
+    content: "\2605";
+    position: absolute;
+    visibility: visible;
+    color: #FA8072;
+  }
+  .star:checked:before {
+    content: "\2606";
+    visibility: visible;
+    position: absolute;
+    color: #FA8072;
+  }
+  .color {
+    margin-top: 14px;
+    margin-bottom: auto;
+    color:  #FA8072;
+  }
+  .addition {
+    float: left;
+  }
 }

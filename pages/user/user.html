@@ -24,15 +24,14 @@
   <ion-list>
     <ion-list-header>Email</ion-list-header>
     <ion-item>
-      <p>jsmith@gmail.com</p>
+      <p>{{ email }}</p>
       <button ion-button clear item-right (click)="changeemail()">Change</button>
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-list-header>Active Listings</ion-list-header>
-    <ion-item>
-      <p>Lexington Pointe Apartment</p>
-    <button ion-button clear item-right (click)="viewlistings()">View</button>
+    <ion-list-header>Active Listings<button ion-button clear item-right (click)="viewlistings()">View</button></ion-list-header>
+    <ion-item *ngFor="let apartment of postings | async">
+      <p>{{ apartment.address }}</p>
   </ion-item>
   </ion-list>
   <button ion-button block (click)="addlisting()">Add a Listing</button>
