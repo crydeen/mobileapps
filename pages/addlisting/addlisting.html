@@ -82,8 +82,9 @@
           </ion-item>
 
     <ion-item>
-      <button ion-button color="primary" (click)="pictureAdded()">Add Picture</button>
-      <img [src]="base64Image" *ngIf="base64Image" />
+      <button ion-button block color="primary" (click)="pictureAdded()">Add Picture</button>
+      <img [src]="AptPicture" *ngIf="AptPicture"/>
+      <button ion-button block color="primary" (click)="Confirm()" *ngIf="AptPicture">Confirm</button>
       </ion-item>
 
   </ion-list>

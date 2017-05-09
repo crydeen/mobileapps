@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseApp } from 'angularfire2';
-//import { Camera } from '@ionic-native/camera';
 import { Camera } from 'ionic-native';
 import firebase from 'firebase';
 
@@ -18,21 +17,30 @@ import firebase from 'firebase';
 })
 export class AddlistingPage {
   apartments: FirebaseListObservable<any>;
-  public guestPicture: string = null;
-  public base64Image: string;
+  public AptPicture: string = null;
+  imageURL: any;
+  image2: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public af: AngularFire, public cameraPlugin: Camera) {
     this.apartments = af.database.list('/apartments');
   }
 
   public addlisting(address, rent, bedrooms, bathrooms, squarefeet, pets) {
+
+    firebase.storage().ref('apartments/').child(this.image2).getDownloadURL().then((url) => {
+         this.imageURL = url;
+         console.log('IMAGE ' + this.imageURL);
+       })
+
+
     this.apartments.push({
       address: address,
       rent: rent,
       bedrooms: bedrooms,
       bathrooms: bathrooms,
       squarefeet: squarefeet,
-      pets: pets
+      pets: pets,
+      image: this.imageURL
     }).then( newListing => {
       this.navCtrl.pop();
     }, error => {
@@ -48,36 +56,37 @@ pictureAdded(position: string, name, data){
         targetWidth: 1000,
         targetHeight: 1000
     }).then((imageData) => {
-      // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.AptPicture = "data:image/jpeg;base64," + imageData;
     }, (err) => {
         console.log(err);
     });
+  }
 
-  let toast = this.toastCtrl.create({
-    message: 'Picture Added',
-    duration: 2000,
-    position: position
-  });
-  toast.present(toast);
-}
+  Confirm(){
+    let image   : string  = 'Apt-' + new Date().getTime() + '.jpg',
+    storageRef  : any,
+    parseUpload : any;
+    this.image2 = image;
 
-// takePicture(){
-//   this.cameraPlugin.getPicture({
-//    quality : 95,
-//    destinationType : this.cameraPlugin.DestinationType.DATA_URL,
-//    sourceType : this.cameraPlugin.PictureSourceType.CAMERA,
-//    allowEdit : true,
-//    encodingType: this.cameraPlugin.EncodingType.PNG,
-//    targetWidth: 500,
-//    targetHeight: 500,
-//    saveToPhotoAlbum: true
-//   }).then(imageData => {
-//    this.guestPicture = imageData;
-//  }, error => {
-//    console.log("ERROR -> " + JSON.stringify(error));
-//  });
-// }
+    return new Promise((resolve, reject) =>
+          {
+             storageRef       = firebase.storage().ref('apartments/' + image);
+             parseUpload      = storageRef.putString(this.AptPicture, 'data_url');
+
+             parseUpload.on('state_changed', (_snapshot) =>
+             {
+                console.log('snapshot progess ' + _snapshot);
+             },
+             (_err) =>
+             {
+                reject(_err);
+             },
+             (success) =>
+             {
+                resolve(parseUpload.snapshot);
+             });
+          });  
+  }
 
 showToast(position: string) {
     let toast = this.toastCtrl.create({

@@ -23,8 +23,9 @@
 <ion-content padding>
   <div [ngSwitch]="apartment">
     <ion-list *ngSwitchCase="'favorites'">
-      <ion-card *ngFor="let apartment of apartments | async">
-        <img src="assets/img/apartment-log-in.jpg"/>
+      <ion-card *ngFor="let apartment of apartments | async"> 
+        <img src="{{apartment.image}}"/>
+
         <ion-card-content>
           <h2>{{apartment.address}}</h2>
           <h3>Rent Per Month: ${{apartment.rent}}</h3>
@@ -34,7 +35,7 @@
         </ion-card-content>
         <ion-row no-padding>
           <ion-col>
-            <button ion-button clear small color="primary"(click)="fav(apartment)" icon-left>
+            <button ion-button clear small color="primary"(click)="getImage(apartment)" icon-left>
               <ion-icon name='star'></ion-icon>
               Favorite
             </button>

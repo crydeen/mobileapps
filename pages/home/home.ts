@@ -20,6 +20,8 @@ export class HomePage {
   favoriteObj: Array<Object>;
   list: any;
   listiterator: any;
+  firestore = firebase.storage();
+  imgsrc: any;
 
   constructor(public navCtrl: NavController, public angfire: AngularFire, public alertCtrl: AlertController, public storage: Storage,
     public actionSheetCtrl: ActionSheetController) {
@@ -27,6 +29,13 @@ export class HomePage {
     this.apartments = angfire.database.list('/apartments');
     //this.favorites = this.angfire.database.list('/favorites');
     this.isFav();
+  }
+
+  getImage(apartment) {
+    this.firestore.ref('apartments/').child(apartment.image).getDownloadURL().then((url) => {
+        this.imgsrc = url;
+        console.log('IMAGE ' + this.imgsrc);
+    })
   }
 
   fav(apartment) {

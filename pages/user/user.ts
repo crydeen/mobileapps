@@ -23,7 +23,9 @@ export class UserPage {
   public changePassword() {
     this.nav.push(ChangepasswordPage);
   }
-
+  addProfilePic(){
+    
+  }
   changeemail(){
     let alert = this.alertCtrl.create({
       title: 'Email Change',
