@@ -20,9 +20,16 @@ export class AddlistingPage {
   public AptPicture: string = null;
   imageURL: any;
   image2: any;
+  postings: FirebaseListObservable<any>;
+  email: any;
+  public guestPicture: string = null;
+  public base64Image: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public af: AngularFire, public cameraPlugin: Camera) {
     this.apartments = af.database.list('/apartments');
+    this.email = JSON.parse(window.localStorage.getItem('currentuser')).email;
+    console.log("Email Check " + this.email);
+    this.postings = af.database.list('/postings/' + window.localStorage.getItem(this.email));
   }
 
   public addlisting(address, rent, bedrooms, bathrooms, squarefeet, pets) {
@@ -32,6 +39,15 @@ export class AddlistingPage {
          console.log('IMAGE ' + this.imageURL);
        })
 
+    this.postings.push({
+      address: address,
+      rent: rent,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+      squarefeet: squarefeet,
+      pets: pets,
+      image: this.imageURL
+    })
 
     this.apartments.push({
       address: address,
@@ -85,7 +101,7 @@ pictureAdded(position: string, name, data){
              {
                 resolve(parseUpload.snapshot);
              });
-          });  
+          });
   }
 
 showToast(position: string) {

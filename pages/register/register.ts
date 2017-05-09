@@ -11,6 +11,9 @@ export class RegisterPage {
   email: any;
   password: any;
   fireauth: any;
+  username: any;
+  name: any;
+  user: any;
   users: FirebaseListObservable<any>;
 
   constructor(private navCtrl: NavController, private alertCtrl: AlertController, public angfire: AngularFire) {
@@ -27,6 +30,9 @@ export class RegisterPage {
     var errorCode = error.code;
     var errorMessage = error.message;
   });
+  window.localStorage.setItem(this.email, this.username);
+  console.log(window.localStorage.getItem(this.email));
+  window.localStorage.setItem(this.username, this.name);
   this.navCtrl.pop();
 }
 

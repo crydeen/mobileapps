@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { ConnectivityService } from '../../providers/connectivity-service';
 import { Geolocation } from 'ionic-native';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -18,10 +18,13 @@ export class MapPage {
   mapInitialised: boolean = false;
   apiKey: 'AIzaSyC25B2JZwzrh3n3MvgNTgccUhc2EhGTU-g';
   markers: FirebaseListObservable<any>;
+  center: any;
 
-  constructor(public nav: NavController, public connectivityService: ConnectivityService, public angfire: AngularFire) {
+  constructor(public nav: NavController, public navParams: NavParams, public connectivityService: ConnectivityService, public angfire: AngularFire) {
     this.loadGoogleMaps();
     this.markers = angfire.database.list('/apartments');
+    this.center = this.navParams.get('center');
+    console.log("Center on Map Page: " + this.center + "Nav Param: " + this.navParams.get('center'));
   }
 
   // ionViewDidLoad() {
@@ -52,7 +55,7 @@ export class MapPage {
               infoWindow.open(this.map, marker);
             });
           } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert('Geocode was not successful for the following reason: ' + status + "For apartment " + addresses.address);
           }
           console.log(count);
           count++;
@@ -124,6 +127,9 @@ export class MapPage {
 
     Geolocation.getCurrentPosition().then((position) => {
       let latLng = new google.maps.LatLng(34.365038, -89.53897);
+      if (this.center != undefined) {
+        latLng = this.center
+      }
       //If we want to do Geolocation
       //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 

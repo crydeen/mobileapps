@@ -69,21 +69,8 @@ export class LoginPage {
       }).catch((error) => {
         console.log(error);
     })
+    console.log(window.localStorage.getItem(this.email))
 
-    this.apartments.subscribe(items => {
-      console.log(items);
-      items.forEach(addresses => {
-
-      });
-    });
-    var database = firebase.database();
-    //  this.users.push({
-    //    email: this.email,
-    //    favorites: null
-    //  })
-    // firebase.database().ref('/users/' + this.email).set({
-    //
-    // })
   }
 
   ionViewDidLoad() {
